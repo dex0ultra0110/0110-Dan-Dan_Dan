@@ -1,0 +1,37 @@
+.danAppBg {
+  background:
+    radial-gradient(900px 600px at 12% 8%, rgba(130,90,255,0.10), transparent 55%),
+    radial-gradient(700px 520px at 72% 22%, rgba(61,224,255,0.08), transparent 60%),
+    radial-gradient(820px 620px at 42% 86%, rgba(255,79,216,0.07), transparent 58%),
+    linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+  color: var(--text-primary);
+}
+
+.danScanline { position: relative; isolation: isolate; }
+.danScanline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,0.06) 0px,
+    rgba(255,255,255,0.06) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  opacity: 0.16;
+}
+
+.danPanelEnter { animation: danPanelEnter var(--base) var(--ease-out) both; }
+@keyframes danPanelEnter {
+  from { opacity: 0; transform: translateY(var(--space-1)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.danGlass {
+  background: rgba(10,11,18,0.58);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(var(--space-4));
+}
