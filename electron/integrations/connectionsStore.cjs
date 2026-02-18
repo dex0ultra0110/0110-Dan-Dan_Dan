@@ -1,13 +1,10 @@
-const Store = require("electron-store");
+const ElectronStore = require("electron-store");
+
+const Store = ElectronStore.default || ElectronStore;
 const store = new Store({ name: "dandadan-connections" });
 
-function listConnections() {
-  return store.get("connections", []);
-}
-
-function getConnection(connectionId) {
-  return listConnections().find((c) => c.connectionId === connectionId) || null;
-}
+function listConnections() { return store.get("connections", []); }
+function getConnection(connectionId) { return listConnections().find((c) => c.connectionId === connectionId) || null; }
 
 function upsertConnection(conn) {
   const existing = listConnections().filter((c) => c.connectionId !== conn.connectionId);
@@ -15,8 +12,7 @@ function upsertConnection(conn) {
 }
 
 function removeConnection(connectionId) {
-  const next = listConnections().filter((c) => c.connectionId !== connectionId);
-  store.set("connections", next);
+  store.set("connections", listConnections().filter((c) => c.connectionId !== connectionId));
 }
 
 module.exports = { listConnections, getConnection, upsertConnection, removeConnection };
